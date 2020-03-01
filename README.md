@@ -6,7 +6,8 @@
 using namespace std;
 //global scope
 
-int  maxrec = 3;//number of nodes
+int  maxrec = 3;
+//number of nodes
 
 struct Teletype
 {
@@ -199,6 +200,7 @@ void check(Teletype* checked)
 }
 
 //implement menu
+
 void menu()
 {
 	cout << "_______________________________________________________\n";
@@ -216,6 +218,7 @@ void menu()
 	return;
 }
 //implementing the functions
+
 void populate(Teletype* record)
 {
 	string name;
