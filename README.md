@@ -3,11 +3,11 @@
 #include <string>
 #include <iomanip>
 #include <stdexcept>
-using namespace std;
-//global scope
+using namespace std;//global scope
 
-int  maxrec = 3;
-//number of nodes
+
+int  maxrec = 3;//number of nodes
+
 
 struct Teletype
 {
@@ -16,8 +16,7 @@ struct Teletype
 	Teletype* nextaddr;
 };
 
-//prototype
-void populate(Teletype*);
+void populate(Teletype*);//prototype
 void display(Teletype*);
 void remove(Teletype**, int);//to be able to change wear the head of struct points we use pointer to pointer
 void menu();
@@ -30,29 +29,24 @@ void check(Teletype*);
 
 int main()
 {
-	//create a variable and pointers
 	int i;//long variable
 	int position, option=1;
 	Teletype* list, * current, * first, *start, *begin;
 	string name;
-	//get the first structure
-	list = new Teletype; //first node
-	current = list;//
-	int flag = 0;// if first created list
+	list = new Teletype; 
+	current = list;
+	int flag = 0;
 	while (option != 7) {
 		menu();
-
 		cout << "Command: ";
 		cin >> option;
 		cin.ignore();
-
 		switch (option)
 		{
 		case 1:
 			//populate the current structure
 			for (i = 0; i < maxrec - 1; i++)
 			{
-				
 				current->nextaddr = new (nothrow) Teletype;//insert new memory for next structure
 				populate(current);
 				try
@@ -65,17 +59,13 @@ int main()
 				}
 				current = current->nextaddr;//link
 			}
-			//last node
 			populate(current);
 			current->nextaddr = NULL;
-
-			//display records
 			cout << "\nThe list consists of the following records: \n";
 			display(list);
 			flag = 1;
 			break;
-
-		case 2://insert
+		case 2:
 			if (flag == 1) {
 				cout << "Enter position of element: ";
 				cin >> position;
@@ -95,7 +85,6 @@ int main()
 			else
 				cout << "Create list first!\n";
 			break;
-
 		case 3://modify
 			if (flag == 1) {
 				begin = list;
@@ -118,7 +107,6 @@ int main()
 			else
 				cout << "Create List first!\n";
 			break;
-
 		case 4:// delete node
 			if (flag == 1) {
 			first = list;
@@ -142,7 +130,6 @@ int main()
 			else
 				cout << "Create List first!\n";
 			break;
-
 		case 5://search 
 			if (flag == 1) {
 				start = list;
@@ -157,7 +144,6 @@ int main()
 			else
 				cout << "Create List first!\n";
 			break;
-
 		case 6://display order
 			if (flag == 1) {
 				first = list;
@@ -168,12 +154,10 @@ int main()
 			else
 				cout << "Create List first!\n";
 			break;
-
 		case 7://exit
 			cout<<"Leaving Program\nBye...\n\n";
 			exit(0);
 			break;
-
 		default://if case does not exist
 			cout << "OPTION INVALID\n";
 		}
@@ -246,7 +230,6 @@ void display(Teletype* contents)
 //implementing remove
 void remove(Teletype** first, int position)
 {
-
 	if (position >= maxrec || position < 0)
 	{
 		throw invalid_argument("Position is invalid!");
@@ -262,7 +245,6 @@ void remove(Teletype** first, int position)
 			return;
 		}
 		for (int i = 1; i <= position && *first != NULL;i++) {
-
 			prev = temp;//n term
 			temp = temp->nextaddr;//(n+1) term
 			if (i == position) {
@@ -290,7 +272,6 @@ void insert(Teletype** first, int position)
 		{
 			temp->nextaddr = *first;//makes new node point to first term
 			*first = temp;//head will point to new node
-
 		}
 		else {
 			for (int i = 0; i < position - 1; i++)
@@ -307,7 +288,6 @@ void insert(Teletype** first, int position)
 //implement search
 int search(Teletype* contents, string name)
 {
-
 	//flag variable
 	int found = 0;
 	while (contents != NULL)//moves until the end of list is reached
@@ -332,7 +312,6 @@ void sort(Teletype** first)
 	//use 2 for loops to move in linked list check using bubble method take first 2 compare continue comparing until we have compared all
 	for (Teletype* start = *first;start != NULL; start=start->nextaddr) {
 		for (Teletype* select= start->nextaddr;select != NULL; select=select->nextaddr) {
-
 			if (start->name > select->name) {
 				//sort
 				string temp = start->name;
@@ -345,8 +324,7 @@ void sort(Teletype** first)
 			}
 		}
 	}
-		
-	return;
+return;
 }
 
 void modify(Teletype** change,int position) {
